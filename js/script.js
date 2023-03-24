@@ -131,10 +131,6 @@ const icons = [
         color: 'blue'
     }
 ];
-/* Milestone 1
-Partendo dalla struttura dati fornita, visualizzare in pagina un box per ogni icona, in cui è presente il nome dell'icona e l'icona stessa.
-Creo html (container-row-col-card) - passo html a const template - sostituendo dati necessari - attacco tmp a ogni obj card delle icons
-*/
 function createBox(icons){
     const{name, prefix, family, color} = icons;
     const tpl = ` <div class="col-12 col-md-4 col-lg-2">
@@ -145,15 +141,36 @@ function createBox(icons){
                 </div>`;
     return tpl;
 }
-function init(){
+// Milestone 3
+function printBox(obj){
     const row = document.querySelector('.row');
     let boxes = '';
-    for (let i = 0; i < icons.length; i++){
-       box = createBox(icons[i]);
+    for (let i = 0; i < obj.length; i++){
+       box = createBox(obj[i]);
        boxes += box;
-       console.log(box)
     }
     row.innerHTML = boxes;
 }
+function drawSelected(selected){
+    document.querySelector('.row').innerHTML = '';
+    const selectedArray = icons.filter((value) => {
+        if (value.type === selected || selected === "all"){
+            return true;
+        } else {
+            return false;
+        }
+    })
+    //Disegno quei box --
+    printBox(selectedArray);
+}
+function getValue(){
+    //Prendo i valori della select
+    drawSelected(this.value)
+}
+function init(){
+    printBox(icons);
+    const select = document.getElementById('select');
+    select.addEventListener('change', getValue);
+}
+
 init()
-// console.log(icons);
