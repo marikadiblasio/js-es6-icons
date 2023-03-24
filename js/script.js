@@ -17,13 +17,14 @@ Inizialmente può essere sufficiente stampare dei semplici div, senza alcuno sti
  */
 
 //Struttura dati fornita
+const color = rndColor();
 const icons = [
     {
         name: 'cat',
         prefix: 'fa-',
         type: 'animal',
         family: 'solid',
-        color: 'orange'
+        [color]: color
     },
     {
         name: 'crow',
@@ -132,12 +133,25 @@ const icons = [
     }
 ];
 
-
+function rndColor(){
+    //Creo la stringa
+const chooseFrom = 'ABCDEF0123456789';
+//inzializzo la variabile in cui inserirò i numeri
+  let hexnum = '#';
+//dichiaro la costante che indica quanto sarà lunga hexnum
+  const chars = 6;
+//var di controllo
+    let i = 0;
+    //finché i è minore di chars - genero randomico tra 0 e la lunghezza della stringa
+  while (i < chars ){
+        let random = getRndNumIncl(0, chooseFrom.length);
+        //aggiungo il carattere che si trova all'indice del numero randomico nella stringa
+         hexnum += `${chooseFrom.charAt([random])}`;
+        i++
+  }
+  return hexnum
+}  
 function createOption() {
-    /**
-     * per ogni type creo un option
-     * attacco l'option alla select ()
-     */
     //Creo array con i type: 
     const optArray = [];
     for (let i =0; i< icons.length; i++) {
@@ -145,12 +159,13 @@ function createOption() {
         optArray.push(icons[i].type);}
     }
     optArray.unshift('all');
-    //console.log(optArray);
+    // per ogni type creo un option
     let options= '';
     for(let x = 0; x < optArray.length; x++){
     const optTpl= `<option value="${optArray[x]}">${optArray[x].toUpperCase()}</option>`;
         options += `${optTpl}`;
     }
+    //attacco l'option alla select ()
     select.innerHTML = options;
 }
 function createBox(icons){
