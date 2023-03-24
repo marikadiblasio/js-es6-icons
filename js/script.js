@@ -135,3 +135,25 @@ const icons = [
 Partendo dalla struttura dati fornita, visualizzare in pagina un box per ogni icona, in cui è presente il nome dell'icona e l'icona stessa.
 Creo html (container-row-col-card) - passo html a const template - sostituendo dati necessari - attacco tmp a ogni obj card delle icons
 */
+function createBox(icons){
+    const{name, prefix, family, color} = icons;
+    const tpl = ` <div class="col-12 col-md-4 col-lg-2">
+                    <div class="card d-flex justify-content-center py-2 align-items-center ${color}">
+                        <div class="${prefix}${family} ${prefix}${name}"></div>
+                        <div class="">${name}</div>
+                    </div>
+                </div>`;
+    return tpl;
+}
+function init(){
+    const row = document.querySelector('.row');
+    let boxes = '';
+    for (let i = 0; i < icons.length; i++){
+       box = createBox(icons[i]);
+       boxes += box;
+       console.log(box)
+    }
+    row.innerHTML = boxes;
+}
+init()
+// console.log(icons);
