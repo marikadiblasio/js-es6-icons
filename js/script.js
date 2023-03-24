@@ -131,6 +131,28 @@ const icons = [
         color: 'blue'
     }
 ];
+
+
+function createOption() {
+    /**
+     * per ogni type creo un option
+     * attacco l'option alla select ()
+     */
+    //Creo array con i type: 
+    const optArray = [];
+    for (let i =0; i< icons.length; i++) {
+        if (optArray.indexOf(icons[i].type) === -1){
+        optArray.push(icons[i].type);}
+    }
+    optArray.unshift('all');
+    //console.log(optArray);
+    let options= '';
+    for(let x = 0; x < optArray.length; x++){
+    const optTpl= `<option value="${optArray[x]}">${optArray[x].toUpperCase()}</option>`;
+        options += `${optTpl}`;
+    }
+    select.innerHTML = options;
+}
 function createBox(icons){
     const{name, prefix, family, color} = icons;
     const tpl = ` <div class="col-12 col-md-4 col-lg-2">
@@ -168,6 +190,7 @@ function getValue(){
     drawSelected(this.value)
 }
 function init(){
+    createOption()
     printBox(icons);
     const select = document.getElementById('select');
     select.addEventListener('change', getValue);
