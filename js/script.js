@@ -17,14 +17,13 @@ Inizialmente può essere sufficiente stampare dei semplici div, senza alcuno sti
  */
 
 //Struttura dati fornita
-const color = rndColor();
 const icons = [
     {
         name: 'cat',
         prefix: 'fa-',
         type: 'animal',
         family: 'solid',
-        [color]: color
+        color: 'orange'
     },
     {
         name: 'crow',
@@ -169,13 +168,18 @@ function createOption() {
     select.innerHTML = options;
 }
 function createBox(icons){
-    const{name, prefix, family, color} = icons;
+    const newcolor = rndColor();
+    let{name, prefix, family, color} = icons;
+    color = newcolor;
     const tpl = ` <div class="col-12 col-md-4 col-lg-2">
-                    <div class="card d-flex justify-content-center py-2 align-items-center ${color}">
+                    <div class="card d-flex justify-content-center py-2 align-items-center ${color}"
+                    style="color: ${newcolor}">
                         <div class="${prefix}${family} ${prefix}${name}"></div>
                         <div class="">${name}</div>
                     </div>
                 </div>`;
+    console.log(tpl);
+
     return tpl;
 }
 // Milestone 3
